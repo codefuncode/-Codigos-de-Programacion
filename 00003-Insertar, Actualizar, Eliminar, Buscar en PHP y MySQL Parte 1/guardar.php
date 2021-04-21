@@ -1,0 +1,66 @@
+<?php
+require '../php/conexion.php';
+
+$nombre       = $_POST['nombre'];
+$email        = $_POST['email'];
+$telefono     = $_POST['telefono'];
+$estado_civil = $_POST['estado_civil'];
+$hijos        = isset($_POST['hijo']) ? $_POST['hijos'] : 0;
+$intereses    = isset($_POST['intereses']) ? $_POST['intereses'] : null;
+
+$arrayIntereses = null;
+
+$num_array = count($intereses);
+$contador  = 0;
+
+if ($num_array > 0) {
+    foreach ($intereses as $key => $value) {
+        if ($contador != $num_array - 1) {
+            $arrayIntereses .= $value . ' ';
+            $contador++;
+        } else {
+            $arrayIntereses .= $value;
+        }
+    }
+}
+
+$sql       = "INSERT INTO personas (nombre, correo, telefono, estado_civil, hijos, intereses) VALUES ('$nombre', '$email', '$telefono', '$estado_civil', '$hijos', '$arrayIntereses')";
+$resultado = $conn->query($sql)
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+    <script src="../js/bootstrap.js" type="text/javascript">
+    </script>
+    <script src="../js/jquery-3.1.0.js" type="text/javascript">
+    </script>
+    <title>
+      Document
+    </title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="row" style="text-align:center">
+          <?php if ($resultado) {?>
+          <h3>
+            REGISTRO GUARDADO
+          </h3>
+          <?php } else {?>
+          <h3>
+            ERROR AL GUARDAR
+          </h3>
+          <?php }?>
+          <a class="btn btn-primary" href="index.php">
+            Regresar
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

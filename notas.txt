@@ -1,0 +1,4 @@
+
+sudo /opt/lampp/lampp start
+
+https://www.youtube.com/watch?v=GUU1ebR23NQ&list=PL-Mlm_HYjCo8eXzU1S7Hx_K7sVwLHsM04
